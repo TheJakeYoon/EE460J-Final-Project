@@ -19,7 +19,18 @@ fig.tight_layout()
 fig.show()
 
 sns.set()
+sns.set_style("whitegrid", {'axes.grid' : False})
 fig, axs = plt.subplots(3,len(img_dict.keys()), figsize=(28,18))
+figh, axsh = plt.subplots(3,len(img_dict.keys()), figsize=(28,18))
 for img in list(img_dict.keys()):
-    for channel in range(3):
-        axs[channel,img].hist(img_dict[img][:,:,channel].ravel(), bins=25, range=[0,256])
+    image = img_dict[img].copy()
+    red_img, green_img, blue_img = image.copy(), image.copy(), image.copy()
+    red_img[:,:,1] = 0 # set green and blue channel to 0
+    red_img[:,:,2] = 0 # set green and blue channel to 0
+    green_img[:,:,0] = 0
+    green_img[:,:,2] = 0
+    blue_img[:,:,0] = 0 # set green and red channel to 0
+    blue_img[:,:,1] = 0
+    for ix, el in enumerate([red_img, green_img, blue_img]):
+        axs[ix,img].imshow(el)
+        axsh[ix,img].hist(el.ravel(), bins=25, range=[0,256])
