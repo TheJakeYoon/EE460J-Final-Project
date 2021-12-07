@@ -11,13 +11,13 @@ from os.path import isfile, join
 
 class Clippy():
 
-    def __init__(self, label_str):
+    def __init__(self, label_str, path):
         self.label = label_str # "man wearing glasses"
-        self.mypath = './unsplash/'
+        self.mypath = path
         self.df_res = pd.DataFrame()
 
     def process(self):
-        device = "cpu"#"cuda" if torch.cuda.is_available() else "cpu"
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         model, preprocess = clip.load("ViT-B/32", device=device)
         label_list = [self.label, ""]
         text = clip.tokenize(label_list).to(device)
