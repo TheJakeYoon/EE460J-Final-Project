@@ -14,22 +14,23 @@ import seaborn as sns
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 warnings.filterwarnings("ignore", category=UserWarning) 
 # pick any image hosted on the internet or locally
-#path = 'https://www.ece.utexas.edu/sites/default/files/portraits/Dimakis-Alex.png'
-path = './temp.jpg'
+path = 'https://www.ece.utexas.edu/sites/default/files/portraits/Dimakis-Alex.png'
+#path = './temp.jpg'
 
 # pass first arg 'online' or 'offline'
-content = GetImage('oasdnline', path)
+content = GetImage('online', path)
 content_img_open = content.img_open()
 plot1 = content.show(content_img_open, 'Content image of choice')
 
 # input clip string label (highlighted item to cyberpunkify), ~3min to complete
 label = "man wearing glasses"
-clip = Clippy(label)
+data_path = './unsplash/'
+clip = Clippy(label, data_path)
 df_clip = clip.process()
 plot2 = clip.plot()
-style_img_open = Image.open('./unsplash/' + df_clip.iloc[0,:].name)
+style_img_open = Image.open(data_path + df_clip.iloc[0,:].name)
 
-style_img_open = Image.open('./unsplash/470eBDOc8bk.jpg')
+#style_img_open = Image.open('./unsplash/470eBDOc8bk.jpg')
 plot2 = content.show(style_img_open, 'Style image of choice')
 
 # resize the chosen style_image to content_image size
