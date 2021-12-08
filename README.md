@@ -1,0 +1,2 @@
+# EE460J-Final-Project
+This project successfully implements CLIP+VGG-19 using a custom Cyberpunk dataset collected using the Unsplash API. For users interested in generating content with this tool, the recommended settings are using around 900 runs (with early stopping), tolerance of 0.0001 and style_weight of 10⁶. Anyone is free to host this code on a dedicated online cloud service as the code base is object-oriented and designed with scalability in mind.
